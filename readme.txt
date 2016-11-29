@@ -11,3 +11,5 @@ compare_entropies.R is R code which runs some basic statistical analyses on the 
 
 Conclusion:
 It seemse that even in small text corpora forward and backward entropy is pretty much the same (Pearson r = .99). 
+
+
