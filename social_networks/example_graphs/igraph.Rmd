@@ -1,0 +1,72 @@
+---
+title: "iGraph example"
+author: "Rumen"
+date: "April 29, 2016"
+output: word_document
+---
+
+In this document I provide a graphical example for some possible social network structures. We will consider 3 simple graphs, each consisting of 7 agents. The examples are somewhat artrifical, and will serve only as an illustration of how different structures migth prompt different intervention strategies.
+</p>
+</p>
+## Random Graph
+A random graph has no particular structure, where each node has equal probability to be selected. To maximize intervention outcomes in such graphs we need to target maximally distant subjects. For example, if we can intervene on two subjects only, it will be better to choose subjects s1 and s7 rather than s1 and s6.
+
+``` {r, echo=FALSE, results =  "hide", message=FALSE, warning=FALSE }
+library(igraph)
+setwd("/xxx")
+```
+
+```{r, echo=FALSE, results =  "asis"}
+
+dat=read.csv("edgeListRandom.csv",header=TRUE) # choose an edgelist in .csv file format
+el=as.matrix(dat) # coerces the data into a two-column matrix format that igraph likes
+
+
+el[,1]=as.character(el[,1])
+el[,2]=as.character(el[,2])
+g=graph.edgelist(el,directed=FALSE) # turns the edgelist into a 'graph object'
+jpeg("Fig1.jpg", width=7, height=7, units="in", res=500)
+plot(g)
+dev.off()
+```
+</p>
+<p><!-- pagebreak --></p> 
+##Centralized graph
+In a highly centralized graph a single subject or a small subgroup of subjects play the role of center, while the rest of the subjects can be seen as a periphery. To maximize intervention outcomes in such graphs it is best to target the center of the network, in this case s1.
+
+```{r, echo=FALSE, results =  "asis"}
+dat=read.csv("edgeListCentralized.csv",header=TRUE) # choose an edgelist in .csv file format
+el=as.matrix(dat) # coerces the data into a two-column matrix format that igraph likes
+
+
+el[,1]=as.character(el[,1])
+el[,2]=as.character(el[,2])
+g=graph.edgelist(el,directed=FALSE) # turns the edgelist into a 'graph object'
+
+jpeg("Fig2.jpg", width=7, height=7, units="in", res=500)
+plot(g)
+dev.off()
+
+```
+
+<p><!-- pagebreak --></p> 
+##Clustered graph
+In some cases a graph can consist of separate clusters. In the example bellow we have two distinct clusters: s1,s2,s3 and s4,s5,s6. In such graphs the two clusters might need to be targetted separately. A special attention should be paid to subjects who bridge the clusters, in this case s7. Although s7 is technically not a part of either of the clusters, he or she might have an important role in transferring information or social influence between clusters. If we aim at overcoming clusterization (merging the two clusters), knowing the properties of the "bridges" like s7 can help us with designing more targetted interventions. 
+
+
+```{r, echo=FALSE, results =  "asis"}
+dat=read.csv("edgeListClustered.csv",header=TRUE) # choose an edgelist in .csv file format
+el=as.matrix(dat) # coerces the data into a two-column matrix format that igraph likes
+
+
+el[,1]=as.character(el[,1])
+el[,2]=as.character(el[,2])
+g=graph.edgelist(el,directed=FALSE) # turns the edgelist into a 'graph object'
+jpeg("Fig3.jpg", width=7, height=7, units="in", res=500)
+plot(g)
+dev.off()
+#http://finzi.psych.upenn.edu/library/igraph0/html/graph.adjacency.html
+```
+
+
+
